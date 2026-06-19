@@ -1,11 +1,47 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+header {
+  width: 700px;
+  background-color: rgb(214, 204, 252);
+}
+
+.nav-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2vh;
+  margin: 1vh;
+}
+
+.nav-header-right,
+.nav-header-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1vh;
+}
+
+main {
+  width: 700px;
+}
+
+.book-cover {
+  max-width: 10vh;
+  max-height: 10vh;
 }
 
 img {
-  max-width: 10vh;
-  max-height: 10vh;
+  max-width: 3vh;
+  max-height: 3vh;
 }
 
 .book-item {
@@ -13,5 +49,7 @@ img {
   grid-template-columns: 10ch 1fr;
   align-items: center;
   gap: 1vh;
-  margin: 2vh;
+  padding: 2vh;
+  margin: 1vh 0;
+  background-color: rgb(200, 227, 214);
 }

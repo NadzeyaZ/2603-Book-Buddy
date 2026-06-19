@@ -4,7 +4,7 @@ import { getAllBooks } from "../api/bookbuddy";
 const BookBuddyContext = createContext();
 
 export default function BookBuddyProvider({ children }) {
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState("jnsdkj");
   const [booksList, setBooksList] = useState([]);
 
   useEffect(() => {
@@ -15,9 +15,13 @@ export default function BookBuddyProvider({ children }) {
     loadBooks();
   }, []);
 
+  function logout() {
+    setToken(null);
+  }
+
   console.log("books", booksList);
 
-  const values = { token, setToken, booksList, setBooksList };
+  const values = { token, setToken, booksList, setBooksList, logout };
   return (
     <BookBuddyContext.Provider value={values}>
       {children}
