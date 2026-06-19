@@ -7,7 +7,7 @@ export default function Layout() {
     <>
       <header>
         <nav>
-          <NavLink to="/books">BookBuddy</NavLink>
+          <NavLink to="/">BookBuddy</NavLink>
           <NavLink to="/books">Books</NavLink>
           {token ? (
             <NavLink to="/account">Account</NavLink>

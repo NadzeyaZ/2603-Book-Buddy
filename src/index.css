@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  max-width: 10vh;
+  max-height: 10vh;
+}
+
+.book-item {
+  display: grid;
+  grid-template-columns: 10ch 1fr;
+  align-items: center;
+  gap: 1vh;
+  margin: 2vh;
+}
