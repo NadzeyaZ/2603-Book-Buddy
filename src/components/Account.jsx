@@ -3,7 +3,6 @@ import { useBookBuddy } from "../context/BookBuddyContext";
 
 export default function Account() {
   const { user, reservedBooks } = useBookBuddy();
-  console.log(user);
   return (
     <>
       <h1>Welcome, {user?.firstname}!</h1>

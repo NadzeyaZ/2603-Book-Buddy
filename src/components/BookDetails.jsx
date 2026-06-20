@@ -1,11 +1,19 @@
 import { useParams } from "react-router";
 import { useBookBuddy } from "../context/BookBuddyContext";
+import { reserveOneBook } from "../api/bookbuddy";
 
 export default function BookDetails() {
-  const { booksList } = useBookBuddy();
+  const { booksList, reservedBooks, setReservedBooks, token, reserveBook } =
+    useBookBuddy();
   const { bookid } = useParams();
   const selectedBook = booksList.find((book) => book.id === Number(bookid));
-  console.log("selectedBook", selectedBook);
+  async function handleReserve() {
+    await reserveBook(Number(bookid));
+  }
+
+  const isReserved = reservedBooks.some(
+    (book) => book.bookid === selectedBook.id,
+  );
   return (
     <div className="book-details">
       <img
@@ -17,7 +25,12 @@ export default function BookDetails() {
         <h1>{selectedBook?.title}</h1>
         <p>{selectedBook?.author}</p>
         <p>{selectedBook?.description}</p>
-        <button>Reserve a book</button>
+        {token &&
+          (!isReserved ? (
+            <button onClick={handleReserve}>Reserve a book</button>
+          ) : (
+            <button disabled>Book already reserved</button>
+          ))}
       </div>
     </div>
   );
