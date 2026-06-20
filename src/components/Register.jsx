@@ -4,13 +4,13 @@ export default function Register() {
   const { register } = useBookBuddy();
   const navigate = useNavigate();
   async function registerAction(formData) {
-    const firstName = formData.get("firstName");
-    const lastName = formData.get("lastName");
+    const firstname = formData.get("firstName");
+    const lastname = formData.get("lastName");
     const email = formData.get("email");
     const password = formData.get("password");
     const credentials = {
-      firstName,
-      lastName,
+      firstname,
+      lastname,
       email,
       password,
     };

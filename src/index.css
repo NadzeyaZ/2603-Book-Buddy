@@ -94,3 +94,10 @@ form input {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+
+.errorMessage {
+  background-color: rgb(244, 194, 194);
+  color: rgb(145, 2, 2);
+  padding: 1vh;
+  margin: 1vh 0;
+}

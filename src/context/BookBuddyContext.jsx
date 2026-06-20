@@ -1,5 +1,11 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getAllBooks, registerUser } from "../api/bookbuddy";
+import {
+  getAllBooks,
+  registerUser,
+  loginUser,
+  getAccountDetails,
+} from "../api/bookbuddy";
+import { useNavigate } from "react-router";
 
 const BookBuddyContext = createContext();
 
@@ -8,6 +14,8 @@ export default function BookBuddyProvider({ children }) {
   const [booksList, setBooksList] = useState([]);
   const [user, setUser] = useState(null);
   const [reservedBooks, setReservedBooks] = useState([]);
+  const [authMessage, setAuthMessage] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function loadBooks() {
@@ -17,10 +25,21 @@ export default function BookBuddyProvider({ children }) {
     loadBooks();
   }, []);
 
+  useEffect(() => {
+    if (!token) {
+      setUser(null);
+      return;
+    }
+    async function getAccDetails(token) {
+      const newUser = await getAccountDetails(token);
+      setUser(newUser);
+    }
+    getAccDetails(token);
+  }, [token]);
+
   async function register(credentials) {
     try {
-      setUser(credentials);
-      const newToken = registerUser(
+      const newToken = await registerUser(
         credentials.firstName,
         credentials.lastName,
         credentials.email,
@@ -29,13 +48,27 @@ export default function BookBuddyProvider({ children }) {
       setToken(newToken);
       localStorage.setItem("token", newToken);
     } catch (e) {
-      throw new e();
+      throw e();
+    }
+  }
+
+  async function login(credentials) {
+    try {
+      const newToken = await loginUser(credentials.email, credentials.password);
+      setToken(newToken);
+      localStorage.setItem("token", newToken);
+      setAuthMessage(null);
+      return true;
+    } catch (e) {
+      setAuthMessage("Incorrect email or password!" || e.message);
+      return false;
     }
   }
 
   function logout() {
     setToken(null);
     setUser(null);
+    setAuthMessage(null);
     localStorage.removeItem("token");
   }
 
@@ -46,10 +79,12 @@ export default function BookBuddyProvider({ children }) {
     setBooksList,
     logout,
     register,
+    login,
     user,
     setUser,
     reservedBooks,
     setReservedBooks,
+    authMessage,
   };
   return (
     <BookBuddyContext.Provider value={values}>

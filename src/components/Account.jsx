@@ -3,9 +3,10 @@ import { useBookBuddy } from "../context/BookBuddyContext";
 
 export default function Account() {
   const { user, reservedBooks } = useBookBuddy();
+  console.log(user);
   return (
     <>
-      <h1>Welcome, {user?.firstName}!</h1>
+      <h1>Welcome, {user?.firstname}!</h1>
       <p>Your email on file with us is {user?.email}</p>
       <h1>Your reservations</h1>
       {reservedBooks.length > 0 ? (
