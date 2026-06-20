@@ -101,3 +101,22 @@ form input {
   padding: 1vh;
   margin: 1vh 0;
 }
+
+.reservationsList {
+  list-style: none;
+}
+
+.reservationItem {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 1vh;
+  padding: 0.5vh;
+  justify-content: space-between;
+  background-color: rgb(237, 237, 237);
+}
+
+.reservationItem button {
+  margin: 1vh;
+  border: 1px solid;
+  border-radius: 5px;
+}

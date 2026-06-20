@@ -107,7 +107,7 @@ export async function getReservations(token) {
 
 export async function reserveOneBook(id, token) {
   try {
-    const response = await fetch(`${BASE_URL}/reservations/`, {
+    const response = await fetch(`${BASE_URL}/reservations`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -127,19 +127,16 @@ export async function reserveOneBook(id, token) {
 
 export async function returnOneBook(id, token) {
   try {
-    const response = await fetch(`${BASE_URL}/reservations/`, {
+    const response = await fetch(`${BASE_URL}/reservations/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ bookId: id }),
     });
-    const result = await response.json();
     if (!response.ok) {
       throw new Error(result.message || "Error when returning a book");
     }
-    return result;
   } catch (error) {
     throw error;
   }

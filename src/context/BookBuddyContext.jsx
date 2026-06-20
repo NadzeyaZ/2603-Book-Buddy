@@ -6,6 +6,7 @@ import {
   getAccountDetails,
   getReservations,
   reserveOneBook,
+  returnOneBook,
 } from "../api/bookbuddy";
 import { useNavigate } from "react-router";
 
@@ -85,6 +86,12 @@ export default function BookBuddyProvider({ children }) {
     setReservedBooks(reservations);
   }
 
+  async function returnBook(bookId) {
+    await returnOneBook(bookId, token);
+    const reservations = await getReservations(token);
+    setReservedBooks(reservations);
+  }
+
   function logout() {
     setToken(null);
     setUser(null);
@@ -106,6 +113,7 @@ export default function BookBuddyProvider({ children }) {
     setReservedBooks,
     authMessage,
     reserveBook,
+    returnBook,
   };
   return (
     <BookBuddyContext.Provider value={values}>

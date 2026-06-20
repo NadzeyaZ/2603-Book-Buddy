@@ -1,5 +1,6 @@
 import { NavLink } from "react-router";
 import { useBookBuddy } from "../context/BookBuddyContext";
+import ReservationsList from "./ReservationsList";
 
 export default function Account() {
   const { user, reservedBooks } = useBookBuddy();
@@ -10,7 +11,7 @@ export default function Account() {
       <h1>Your reservations</h1>
       {reservedBooks.length > 0 ? (
         <>
-          <p>Your reservations</p>
+          <ReservationsList />
         </>
       ) : (
         <p>
