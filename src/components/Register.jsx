@@ -15,7 +15,7 @@ export default function Register() {
       password,
     };
 
-    register(credentials);
+    await register(credentials);
     navigate("/books");
   }
   return (

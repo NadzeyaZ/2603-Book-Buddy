@@ -135,7 +135,7 @@ export async function returnOneBook(id, token) {
       },
     });
     if (!response.ok) {
-      throw new Error(result.message || "Error when returning a book");
+      throw new Error("Error when returning a book");
     }
   } catch (error) {
     throw error;

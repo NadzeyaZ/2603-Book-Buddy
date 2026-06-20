@@ -1,7 +1,8 @@
 import { NavLink, useNavigate } from "react-router";
 import { useBookBuddy } from "../context/BookBuddyContext";
+import { useEffect } from "react";
 export default function Login() {
-  const { login, authMessage } = useBookBuddy();
+  const { login, authMessage, setAuthMessage } = useBookBuddy();
   const navigate = useNavigate();
   async function loginAction(formData) {
     const email = formData.get("email");
@@ -15,6 +16,9 @@ export default function Login() {
       navigate("/books");
     }
   }
+  useEffect(() => {
+    return () => setAuthMessage(null);
+  }, []);
   return (
     <>
       <h1>Log in to your account!</h1>

@@ -55,8 +55,8 @@ export default function BookBuddyProvider({ children }) {
   async function register(credentials) {
     try {
       const newToken = await registerUser(
-        credentials.firstName,
-        credentials.lastName,
+        credentials.firstname,
+        credentials.lastname,
         credentials.email,
         credentials.password,
       );
@@ -114,6 +114,7 @@ export default function BookBuddyProvider({ children }) {
     authMessage,
     reserveBook,
     returnBook,
+    setAuthMessage,
   };
   return (
     <BookBuddyContext.Provider value={values}>
