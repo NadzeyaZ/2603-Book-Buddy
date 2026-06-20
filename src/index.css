@@ -120,3 +120,14 @@ form input {
   border: 1px solid;
   border-radius: 5px;
 }
+
+.searchBar {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  margin: 1vh 0;
+}
+
+.searchBar button {
+  border: 1px solid gray;
+  border-radius: 5px;
+}

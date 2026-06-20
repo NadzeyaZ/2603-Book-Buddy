@@ -8,9 +8,9 @@ export default function BooksListItem({ bookItem }) {
         className="book-cover"
       />
       <div className="book-data">
-        <h1>
+        <h2>
           <NavLink to={`/books/${bookItem.id}`}>{bookItem.title}</NavLink>
-        </h1>
+        </h2>
         <h3>{bookItem.author}</h3>
         <p>{bookItem.description}</p>
       </div>
