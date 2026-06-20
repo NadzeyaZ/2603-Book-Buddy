@@ -1,3 +1,4 @@
+import { NavLink } from "react-router";
 export default function BooksListItem({ bookItem }) {
   return (
     <li className="book-item">
@@ -7,8 +8,10 @@ export default function BooksListItem({ bookItem }) {
         className="book-cover"
       />
       <div className="book-data">
-        <h3>{bookItem.title}</h3>
-        <h5>{bookItem.author}</h5>
+        <h1>
+          <NavLink to={`/books/${bookItem.id}`}>{bookItem.title}</NavLink>
+        </h1>
+        <h3>{bookItem.author}</h3>
         <p>{bookItem.description}</p>
       </div>
     </li>

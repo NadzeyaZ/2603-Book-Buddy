@@ -1,11 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getAllBooks } from "../api/bookbuddy";
+import { getAllBooks, registerUser } from "../api/bookbuddy";
 
 const BookBuddyContext = createContext();
 
 export default function BookBuddyProvider({ children }) {
-  const [token, setToken] = useState("jnsdkj");
+  const [token, setToken] = useState(localStorage.getItem("token"));
   const [booksList, setBooksList] = useState([]);
+  const [user, setUser] = useState(null);
+  const [reservedBooks, setReservedBooks] = useState([]);
 
   useEffect(() => {
     async function loadBooks() {
@@ -15,13 +17,40 @@ export default function BookBuddyProvider({ children }) {
     loadBooks();
   }, []);
 
-  function logout() {
-    setToken(null);
+  async function register(credentials) {
+    try {
+      setUser(credentials);
+      const newToken = registerUser(
+        credentials.firstName,
+        credentials.lastName,
+        credentials.email,
+        credentials.password,
+      );
+      setToken(newToken);
+      localStorage.setItem("token", newToken);
+    } catch (e) {
+      throw new e();
+    }
   }
 
-  console.log("books", booksList);
+  function logout() {
+    setToken(null);
+    setUser(null);
+    localStorage.removeItem("token");
+  }
 
-  const values = { token, setToken, booksList, setBooksList, logout };
+  const values = {
+    token,
+    setToken,
+    booksList,
+    setBooksList,
+    logout,
+    register,
+    user,
+    setUser,
+    reservedBooks,
+    setReservedBooks,
+  };
   return (
     <BookBuddyContext.Provider value={values}>
       {children}

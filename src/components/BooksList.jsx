@@ -7,7 +7,7 @@ export default function BooksList() {
     <>
       <ul className="books-list">
         {booksList.map((bookItem) => {
-          return <BooksListItem bookItem={bookItem} />;
+          return <BooksListItem bookItem={bookItem} key={bookItem.id} />;
         })}
       </ul>
     </>
